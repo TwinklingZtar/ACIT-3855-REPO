@@ -8,7 +8,7 @@ RUN pip3 install -r requirements.txt
 COPY ./app.py /app/
 COPY ./app_conf.yml /app/
 COPY ./log_conf.yml /app/
-COPY ./openapi.yml /app/
+COPY ./OpenAPI.yml /app/
 
 ENTRYPOINT ["python3"]
 CMD ["app.py"]
