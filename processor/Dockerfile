@@ -1,5 +1,5 @@
 FROM ubuntu:22.04
-LABEL maintainer= istewart17@my.bcit.ca
+LABEL maintainer=istewart17@my.bcit.ca
 RUN apt-get update -y && \
     apt-get install -y python3 python3-pip
 COPY ./requirements.txt /app/requirements.txt
