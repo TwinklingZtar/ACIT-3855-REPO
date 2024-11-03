@@ -4,10 +4,10 @@ import time
 import uvicorn
 
 # from db import make_session
-from models import Base, OpenParty, PartyJoinRequest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, Integer, String, DateTime
+# from models import Base, OpenParty, PartyJoinRequest
+# from sqlalchemy import create_engine
+# from sqlalchemy.orm import sessionmaker
+# from sqlalchemy import Column, Integer, String, DateTime
 import datetime
 import sqlalchemy
 import mysql.connector
@@ -30,7 +30,7 @@ with open('app_conf.yml', 'r') as f:
 EVENT_FILE = "APIdata.json"
 MAX_EVENTS = 5
 
-DB_ENGINE = create_engine(f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}")
+# DB_ENGINE = create_engine(f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}")
 
 
 
