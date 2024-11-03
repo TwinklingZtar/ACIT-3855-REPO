@@ -9,8 +9,8 @@ COPY ./app.py /app/
 COPY ./app_conf.yml /app/
 COPY ./log_conf.yml /app/
 COPY ./OpenAPI.yaml /app/
-COPY ./create_database_mysql.py
-COPY ./drop_tables.py
+COPY ./create_database_mysql.py /app/
+COPY ./drop_tables.py /app/
 
 ENTRYPOINT ["python3"]
 CMD ["app.py"]
