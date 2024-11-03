@@ -1,0 +1,13 @@
+version: 1
+
+eventstore1:
+  url: http://localhost:8090/party-list/create-open-party
+eventstore2:
+  url: http://localhost:8090/party-list/join-open-party
+
+events:
+  hostname: kafka-acit3855.eastus.cloudapp.azure.com
+  port: 9092
+  topic: events
+
+  

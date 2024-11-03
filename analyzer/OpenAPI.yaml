@@ -1,0 +1,195 @@
+openapi: 3.0.0
+info:
+  title: DungeonFindr analyzer API
+  description: This API helps organize D&D Games
+  contact:
+    email: istewart17@my.bcit.ca
+  version: 0.0.1
+servers:
+- url: /
+tags:
+- name: formation
+  description: analyzer for kafka msgs
+
+
+
+paths:
+  /party-list/create-open-party:
+    get:
+      tags:
+        - formation
+      summary: gets event payload for create-open-party event
+      operationId: app.get_open_parties
+      description: gets event payload for create-open-party event
+      parameters:
+        - name: index
+          in: query
+          description: Gets the create-open-party at the index in the event store
+          schema:
+            type: integer
+            example: 100
+      responses:
+        '200':
+          description: Successfully done
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/OpenPartyCard'
+        '400':
+          description: invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+
+
+
+  /party-list/join-open-party:
+    get:
+      tags:
+        - formation
+      summary: gets event payload for join-party-request event
+      operationId: app.get_join_requests
+      description: gets event payload for join-party-request event
+      parameters:
+        - name: index
+          in: query
+          description: Gets the join-party-request at the index in the event store
+          schema:
+            type: integer
+            example: 100
+      responses:
+        '200':
+          description: Successfully done
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/PlayerJoinRequest'
+        '400':
+          description: invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+
+  /stats:
+    get:
+      tags:
+        - formation
+      summary: gets event store stats
+      operationId: app.get_stats
+      description: gets event store stats
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stats'
+
+components:
+  schemas:
+    OpenPartyCard:
+      required:
+      - tc
+      - campaign
+      - game_frequency
+      - game_location
+      - game_master_id
+      - game_time
+      - max_players
+      - open_party_id
+      type: object
+      properties:
+        tc:
+          type: string
+          example: 9902dd83-f56c-4c0e-a7f6-cfed6b2f329b_2024-09-24 11:16:27.229803
+        game_master_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        open_party_id:
+          type: string
+          example: A12345
+        campaign:
+          type: string
+          example: Mines of Phandelver
+        game_time:
+          type: string
+          example: 17:00
+        game_frequency:
+          type: string
+          example: monthly
+        game_location:
+          type: string
+          example: online
+        max_players:
+          type: integer
+          example: 5
+  
+    PlayerJoinRequest:
+      required:
+      - tc
+      - open_party_id
+      - player_id
+      - player_rating
+      - alignment
+      - background
+      - class
+      - level
+      - species
+      type: object
+      properties:
+        tc:
+          type: string
+          example: 9902dd83-f56c-4c0e-a7f6-cfed6b2f329b_2024-09-24 11:16:27.229803
+        player_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        open_party_id:
+          type: string
+          example: A12345
+        player_rating:
+          type: number
+          example: 4.7
+        class:
+          type: string
+          example: Wizard
+        species:
+          type: string
+          example: Elf
+        background:
+          type: string
+          example: Sage
+        alignment:
+          type: string
+          example: Chaotic Good
+        level:
+          type: integer
+          example: 3
+  
+    Stats:
+      required:
+        - num_cop
+        - num_jop
+      properties:
+        num_cop:
+          type: integer
+          example: 100
+        num_jop:
+          type: integer
+          example: 100
+

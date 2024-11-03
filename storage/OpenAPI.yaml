@@ -1,0 +1,228 @@
+openapi: 3.0.0
+info:
+  title: DungeonFindr API
+  description: This API helps organize D&D Games
+  contact:
+    email: istewart17@my.bcit.ca
+  version: 0.0.2
+servers:
+- url: /
+tags:
+- name: formation
+  description: Operations used to form a party of players
+paths:
+
+
+  /party-list/create-open-party:
+
+
+    get:
+      tags:
+        - formation
+      summary: gets recently opened parties
+      operationId: app.get_open_parties
+      description: gets open parties added after timestamp
+      parameters:
+        - name: start_timestamp
+          in: query
+          description: limits number of returned items
+          schema:
+            type: string
+            format: date-time
+            example: 2016-08-29 09:12:33.001000
+        - name: end_timestamp
+          in: query
+          description: Limits number of returned items
+          schema:
+            type: string
+            format: date-time
+            example: 2016-08-29 09:12:33.001000
+      responses:
+        '200':
+          description: Successfully returned a list of new open parties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OpenPartyCard'
+        '400':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string   
+
+
+
+
+    # post:
+    #   tags:
+    #   - formation
+    #   summary: Creates a new openParty that players can join
+    #   description: Adds a new open party to the openParty list visible by other users
+    #   operationId: app.create_open_party
+    #   requestBody:
+    #     description: Adding OpenParty to quest board
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/OpenPartyCard'
+    #   responses:
+    #     "201":
+    #       description: Item created
+    #     "400":
+    #       description: "Invalid input, object invalid"
+
+
+
+
+
+
+
+  /party-list/join-open-party:
+
+
+    get:
+      tags:
+        - formation
+      summary: gets recent join requests
+      operationId: app.get_party_join_request
+      description: gets open parties added after timestamp
+      parameters:
+        - name: start_timestamp
+          in: query
+          description: limits number of returned items
+          schema:
+            type: string
+            format: date-time
+            example: 2016-08-29 09:12:33.001000
+        - name: end_timestamp
+          in: query
+          description: Limits number of returned items
+          schema:
+            type: string
+            format: date-time
+            example: 2016-08-29 09:12:33.001000
+      responses:
+        '200':
+          description: Successfully returned a list of new party join requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerJoinRequest'
+        '400':
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string 
+
+
+
+
+    # post:
+    #   tags:
+    #   - devices
+    #   summary: Allows players to join a open party
+    #   description: Sends a games owner a player join request
+    #   operationId: app.join_open_party
+    #   requestBody:
+    #     description: Sending request to join party
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/PlayerJoinRequest'
+    #   responses:
+    #     "201":
+    #       description: Item created
+    #     "400":
+    #       description: "Invalid input, object invalid"
+components:
+  schemas:
+    OpenPartyCard:
+      required:
+      - tc
+      - campaign
+      - game_frequency
+      - game_location
+      - game_master_id
+      - game_time
+      - max_players
+      - open_party_id
+      type: object
+      properties:
+        tc:
+          type: string
+          example: 9902dd83-f56c-4c0e-a7f6-cfed6b2f329b_2024-09-24 11:16:27.229803
+        game_master_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        open_party_id:
+          type: string
+          example: A12345
+        campaign:
+          type: string
+          example: Mines of Phandelver
+        game_time:
+          type: string
+          example: 17:00
+        game_frequency:
+          type: string
+          example: monthly
+        game_location:
+          type: string
+          example: online
+        max_players:
+          type: integer
+          example: 5
+    PlayerJoinRequest:
+      required:
+      - tc
+      - open_party_id
+      - player_id
+      - player_rating
+      - alignment
+      - background
+      - class
+      - level
+      - species
+      type: object
+      properties:
+        tc:
+          type: string
+          example: 9902dd83-f56c-4c0e-a7f6-cfed6b2f329b_2024-09-24 11:16:27.229803
+        player_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        open_party_id:
+          type: string
+          example: A12345
+        player_rating:
+          type: number
+          example: 4.7
+        class:
+          type: string
+          example: Wizard
+        species:
+          type: string
+          example: Elf
+        background:
+          type: string
+          example: Sage
+        alignment:
+          type: string
+          example: Chaotic Good
+        level:
+          type: integer
+          example: 3

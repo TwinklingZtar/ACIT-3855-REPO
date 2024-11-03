@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: DungeonFindr API
+  description: This API helps organize D&D Games
+  contact:
+    email: istewart17@my.bcit.ca
+  version: 0.0.2
+servers:
+- url: /
+tags:
+- name: formation
+  description: Operations used to form a party of players
+paths:
+  /stats/eventlog:
+    get:
+      summary: gets data from eventlog file
+      operationId: app.getstats
+      description: gets open parties and join request data
+      responses:
+        '200':
+          description: successfully returned list of events
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+        '400': 
+          description: not success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+components:
+  schemas:
+    ReadingStats:
+      required:
+      - num_open_parties
+      - num_join_requests
+      - avg_party_size
+      - avg_player_rating
+      type: object
+      properties:
+        num_open_parties:
+          type: integer
+          example: 232
+        num_join_requests:
+          type: integer
+          example: 1206
+        avg_party_size:
+          type: integer
+          example: 9
+        avg_player_rating:
+          type: integer
+          example: 9
+
+
+
