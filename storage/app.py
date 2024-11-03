@@ -3,7 +3,7 @@ import json
 import time
 import uvicorn
 
-from db import make_session
+# from db import make_session
 from models import Base, OpenParty, PartyJoinRequest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
