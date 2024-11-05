@@ -23,6 +23,51 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - "zookeeper"
+  
+  receiver:
+    image: receiver  # Default to using the prebuilt image named 'receiver'
+    build:
+      context: ../receiver  # Build context for creating the image if '--build' is used
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+      - db
+
+  storage:
+    image: storage
+    build:
+      context: ../storage
+    ports:
+      - "8090:8090"
+    depends_on:
+      - kafka
+      - db
+
+  processing:
+    image: processing
+    build:
+      context: ../processor
+    ports:
+      - "8100:8100"
+    depends_on:
+      - kafka
+      - db
+      - storage
+      - receiver
+
+  analyzer:
+    image: analyzer
+    build:
+      context: ../analyzer
+    ports:
+      - "8110:8110"
+    depends_on:
+      - kafka
+      - db
+      - storage
+      - receiver
+  
   db:
     image: mysql:5.7
     restart: always
