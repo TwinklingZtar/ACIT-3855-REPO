@@ -5,9 +5,9 @@ import uvicorn
 
 # from db import make_session
 # from models import Base, OpenParty, PartyJoinRequest
-# from sqlalchemy import create_engine
-# from sqlalchemy.orm import sessionmaker
-# from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String, DateTime
 import datetime
 import sqlalchemy
 import mysql.connector
@@ -30,7 +30,7 @@ with open('app_conf.yml', 'r') as f:
 EVENT_FILE = "APIdata.json"
 MAX_EVENTS = 5
 
-# DB_ENGINE = create_engine(f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}")
+DB_ENGINE = create_engine(f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}")
 
 
 
@@ -213,6 +213,23 @@ def process_messages():
 
             sql_query = sqlalchemy.text(f"INSERT INTO open_party (open_party_id, game_master_id, campaign, game_location, game_frequency, max_players, game_time, date_created, tc) VALUES('{body['open_party_id']}', '{body['game_master_id']}', '{body['campaign']}', '{body['game_location']}','{body['game_frequency']}',  {body['max_players']}, '{body['game_time']}', '{body['date_created']}','{body['tc']}');")
             
+            # connection = mysql.connector.connect(
+            #     user=app_config['datastore']['user'],
+            #     password=app_config['datastore']['password'],
+            #     host=app_config['datastore']['hostname'],
+            #     port=app_config['datastore']['port'],
+            #     database=app_config['datastore']['db']
+            # )
+            
+            # cursor = connection.cursor(dictionary=True)
+            
+            # # with DB_ENGINE.connect() as connection:
+            # cursor.execute(sql_query)
+            # cursor.close()
+            # connection.close()
+            
+            
+            
             with DB_ENGINE.connect() as connection:
                 connection.execute(sql_query)
                 connection.commit()
@@ -241,5 +258,5 @@ if __name__=="__main__":
     t1 = Thread(target=process_messages)
     t1.setDaemon(True)
     t1.start()
-    app.run(port=8090)
+    app.run(host="0.0.0.0",port=8090)
     
