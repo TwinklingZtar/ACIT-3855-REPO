@@ -72,7 +72,7 @@ services:
   backend:
     image: backend
     build:
-      context: ./dashboard/backend  # Path to the directory where your Dockerfile is located
+      context: ../dashboard/backend  # Path to the directory where your Dockerfile is located
     ports:
       - "3000:3000"
     depends_on:
