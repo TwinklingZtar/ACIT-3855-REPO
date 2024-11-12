@@ -5,6 +5,7 @@ services:
     ports:
       - "2181"
     hostname: zookeeper
+
   kafka:
     image: wurstmeister/kafka
     command: [start-kafka.sh]
@@ -23,11 +24,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - "zookeeper"
-  
+
   receiver:
-    image: receiver  # Default to using the prebuilt image named 'receiver'
+    image: receiver
     build:
-      context: ../receiver  # Build context for creating the image if '--build' is used
+      context: ../receiver
     ports:
       - "8080:8080"
     depends_on:
@@ -67,7 +68,21 @@ services:
       - db
       - storage
       - receiver
-  
+
+  backend:
+    image: backend
+    build:
+      context: ./dashboard/backend  # Path to the directory where your Dockerfile is located
+    ports:
+      - "3000:3000"
+    depends_on:
+      - kafka
+      - db
+      - receiver
+      - storage
+      - processing
+      - analyzer
+
   db:
     image: mysql:5.7
     restart: always
@@ -81,5 +96,6 @@ services:
     volumes:
       - my-db:/var/lib/mysql
       - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
+
 volumes:
   my-db:
