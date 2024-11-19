@@ -30,8 +30,14 @@ with open('app_conf.yml', 'r') as f:
 EVENT_FILE = "APIdata.json"
 MAX_EVENTS = 5
 
-DB_ENGINE = create_engine(f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}")
-
+# DB_ENGINE = create_engine(f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}")
+DB_ENGINE = create_engine(
+    f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}",
+    pool_size=10,                # Maximum number of connections in the pool
+    max_overflow=5,              # Allow 5 more connections above pool_size
+    pool_recycle=300,            # Recycle connections after 300 seconds
+    pool_pre_ping=True           # Check if connections are alive before using
+)
 
 
 headers = {
