@@ -32,6 +32,9 @@ with open('log_conf.yml', 'r') as f:
 
 logger = logging.getLogger('basicLogger')
 
+
+client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+
 ###### replacment code for post requests
 
 # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
@@ -66,7 +69,7 @@ def create_open_party(body):
     
     
     
-    client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+    # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
     topic = client.topics[str.encode(app_config['events']['topic'])]
     
     
@@ -100,7 +103,7 @@ def join_open_party(body):
     # rcontent = json.loads(r._content.decode('utf-8'))
     
     
-    client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+    # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
     topic = client.topics[str.encode(app_config['events']['topic'])]
     
     
