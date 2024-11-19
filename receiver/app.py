@@ -34,6 +34,8 @@ logger = logging.getLogger('basicLogger')
 
 
 client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
+topic = client.topics[str.encode(app_config['events']['topic'])]
+producer = topic.get_sync_producer()
 
 ###### replacment code for post requests
 
@@ -70,16 +72,16 @@ def create_open_party(body):
     
     
     # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-    topic = client.topics[str.encode(app_config['events']['topic'])]
+    # topic = client.topics[str.encode(app_config['events']['topic'])]
     
     
-    with topic.get_sync_producer() as producer:
-        msg = {'type': 'create_open_party',
-            'datetime':datetime.datetime.now().isoformat(),
-            'payload': nb}
-        msg_str = json.dumps(msg)
-        producer.produce(msg_str.encode('utf-8'))
-    
+    # with topic.get_sync_producer() as producer:
+    msg = {'type': 'create_open_party',
+        'datetime':datetime.datetime.now().isoformat(),
+        'payload': nb}
+    msg_str = json.dumps(msg)
+    producer.produce(msg_str.encode('utf-8'))
+
     
     # logger.info(f"Returned event :create_open_party with tracecode: {rcontent['tc']} and status: {r.status_code}")
     
@@ -104,16 +106,16 @@ def join_open_party(body):
     
     
     # client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-    topic = client.topics[str.encode(app_config['events']['topic'])]
+    # topic = client.topics[str.encode(app_config['events']['topic'])]
     
     
     
-    with topic.get_sync_producer() as producer:
-        msg = {'type': 'create_join_request',
-            'datetime':datetime.datetime.now().isoformat(),
-            'payload': nb}
-        msg_str = json.dumps(msg)
-        producer.produce(msg_str.encode('utf-8'))
+    # with topic.get_sync_producer() as producer:
+    msg = {'type': 'create_join_request',
+        'datetime':datetime.datetime.now().isoformat(),
+        'payload': nb}
+    msg_str = json.dumps(msg)
+    producer.produce(msg_str.encode('utf-8'))
 
     # logger.info(f"Returned event :join_open_party with tracecode: {rcontent['tc']} and status: {r.status_code}")
     
