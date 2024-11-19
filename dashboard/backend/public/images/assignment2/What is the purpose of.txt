@@ -1,0 +1,26 @@
+What is the purpose of the PMD Maven Plugin?
+- Analyzes source code to detect potential bugs, code smells, and security vulnerabilities.
+- Helps enforce coding standards and best practices.
+- Improves code maintainability and understanding.
+
+What PMD code violation do you get?
+- see image
+
+What is the difference between the pmd:pmd and pmd:check targets?
+- pmd:pmd
+	- Performs a full PMD analysis on the entire project.
+	- Useful for comprehensive code quality checks.
+- pmd:check
+	- Performs a quick PMD analysis, often focusing on specific rules or files.
+	- Faster than pmd:pmd for smaller-scale analysis.
+
+Show the output for each in your pipeline.
+- see image
+
+In general, what causes a Stage/Job in a Pipeline to fail (other than an
+error in the pipeline itself)?
+- Agent or node unavailability.
+- Security vulnerability scans that identify issues.
+- Stages or steps that exceed specified time limits.
+- Version conflicts or missing dependencies.
+- Test failures caused by bugs or incorrect test cases.

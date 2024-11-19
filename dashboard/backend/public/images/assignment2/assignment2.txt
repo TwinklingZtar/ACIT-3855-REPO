@@ -1,0 +1,39 @@
+docker run -d --name gitlab-runner --restart always \
+  -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  gitlab/gitlab-runner:latest
+  
+  
+  glrt-t3_bmjzxRmAGBPtzDMLJYGm
+  
+docker run -d --name docker-runner-a2 --restart always   -v /srv/gitlab-runner/config:/etc/gitlab-runner   -v /var/run/docker.sock:/var/run/docker.sock   assignment2
+
+
++ set +x
+The following complex command extracts the value of the <name/> element
+within <project/> of your Java/Maven projects "pom.xml" file.
+++ mvn help:evaluate -Dexpression=project.name
+++ grep Building
+++ awk '{print $3}'
++ NAME=my-app
++ set +x
+The following complex command behaves similarly to the previous one but
+extracts the value of the <version/> element within <project/> instead.
+++ mvn help:evaluate -Dexpression=project.version
+++ sed 's/\x1B[[0-9;]*[a-zA-Z]//g'
+++ grep Building
+++ awk '{print $4}'
++ VERSION=1.0-SNAPSHOT
+The following command runs and outputs the execution of your Java
+application (which Jenkins built using Maven) to the Jenkins UI.
++ set +x
++ java -jar target/my-app-1.0-SNAPSHOT.jar
+Error: Could not find or load main class com.mycompany.app.App
+Caused by: java.lang.ClassNotFoundException: com.mycompany.app.App
+Cleaning up project directory and file based variables 00:01
+ERROR: Job failed: exit code 1
+
+just run gitlab-runner run
+
+
+

@@ -32,6 +32,7 @@ async function fetchData() {
         const randomIndex = Math.floor(Math.random() * 101);
         const response2 = await axios.get(`http://kafka-acit3855.eastus.cloudapp.azure.com:8110/party-list/create-open-party?index=${randomIndex}`);
         currentData.dataFromEndpoint2 = response2.data;
+        currentData.dataFromEndpoint2["rIndex"] = randomIndex
     } catch (error) {
         console.error('Error fetching data from endpoint2:', error.message);
         currentData.dataFromEndpoint2 = { error: 'Failed to fetch data from endpoint2' };
@@ -41,6 +42,7 @@ async function fetchData() {
         const randomIndex = Math.floor(Math.random() * 101);
         const response3 = await axios.get(`http://kafka-acit3855.eastus.cloudapp.azure.com:8110/party-list/join-open-party?index=${randomIndex}`);
         currentData.dataFromEndpoint3 = response3.data;
+        currentData.dataFromEndpoint3["rIndex"] = randomIndex
     } catch (error) {
         console.error('Error fetching data from endpoint3:', error.message);
         currentData.dataFromEndpoint3 = { error: 'Failed to fetch data from endpoint3' };
