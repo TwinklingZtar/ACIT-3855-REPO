@@ -43,7 +43,7 @@ services:
     environment:
       - TARGET_ENV=test
     volumes:
-      - /home/kafka/config/receiver:/config
+      - /home/azureuser/config/receiver:/config
     depends_on:
       kafka:
         condition: service_healthy
@@ -59,7 +59,7 @@ services:
     environment:
       - TARGET_ENV=test
     volumes:
-      - /home/kafka/config/storage:/config
+      - /home/azureuser/config/storage:/config
     depends_on:
       kafka:
         condition: service_healthy
@@ -75,7 +75,7 @@ services:
     environment:
       - TARGET_ENV=test
     volumes:
-      - /home/kafka/config/processing:/config
+      - /home/azureuser/config/processing:/config
     depends_on:
       - kafka
       - db
@@ -91,7 +91,7 @@ services:
     environment:
       - TARGET_ENV=test
     volumes:
-      - /home/kafka/config/analyzer:/config
+      - /home/azureuser/config/analyzer:/config
     depends_on:
       - kafka
       - db
