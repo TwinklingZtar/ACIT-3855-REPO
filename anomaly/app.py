@@ -61,7 +61,7 @@ logger.info(f"create_join_request character level threshold: {app_config['thresh
 
 
 def get_anomalies(anomaly_type):
-    datastore_path = app_config["datastore"]
+    datastore_path = f"/data/{app_config['datastore']}"
     
     try:
         with open(datastore_path, 'r') as file:
@@ -114,7 +114,8 @@ def process_messages():
         
         if msg["type"] == "create_open_party" :
             if int(body["game_time"]) > int(app_config["thresholds"]["createOpen"]):
-                datastore_path = app_config["datastore"]
+                datastore_path = f"/data/{app_config['datastore']}"
+
                 try:
                     with open(datastore_path, 'r') as file:
                         data_list = json.load(file)  # Load existing data from the file
@@ -138,7 +139,8 @@ def process_messages():
             
         if msg["type"] == "create_join_request":
             if int(body["level"]) > int(app_config["thresholds"]["joinOpen"]):
-                datastore_path = app_config["datastore"]
+                datastore_path = f"/data/{app_config['datastore']}"
+
                 try:
                     with open(datastore_path, 'r') as file:
                         data_list = json.load(file)  # Load existing data from the file
