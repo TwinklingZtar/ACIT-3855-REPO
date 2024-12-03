@@ -46,15 +46,9 @@ logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
 
 
-
-# # load app config
-# with open('app_conf.yml', 'r') as f:
-#     app_config = yaml.safe_load(f.read())
-
 EVENT_FILE = "APIdata.json"
 MAX_EVENTS = 5
 
-# DB_ENGINE = create_engine(f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}")
 DB_ENGINE = create_engine(
     f"mysql+pymysql://{app_config['datastore']['user']}:{app_config['datastore']['password']}@{app_config['datastore']['hostname']}:{app_config['datastore']['port']}/{app_config['datastore']['db']}",
     pool_size=10,                # Maximum number of connections in the pool
@@ -67,26 +61,6 @@ DB_ENGINE = create_engine(
 headers = {
         'Content-Type': 'application/json'
     }
-
-# # load log config
-# with open('log_conf.yml', 'r') as f:
-#     log_config = yaml.safe_load(f.read(),)
-#     logging.config.dictConfig(log_config)
-
-# logger = logging.getLogger('basicLogger')
-
-
-
-# def get_open_party(start_timestamp, end_timestamp):
-#     #do db stuff
-#     sql_query = sqlalchemy.text(f"SELECT * FROM open_party WHERE date_created >= {str(start_timestamp)} AND date_created <= {str(end_timestamp)} ")
-    
-    
-#     with DB_ENGINE.connect() as connection:
-#         connection.execute(sql_query)
-    
-#     return
-    
 
 
 
@@ -174,60 +148,12 @@ def get_party_join_request(start_timestamp, end_timestamp):
 
 
 
-
-
-
-
-
-
-
-
-
-# functions here
-# def create_open_party(body):
-    
-    
-#     body['date_created'] = datetime.datetime.now().isoformat()
-
-    
-#     sql_query = sqlalchemy.text(f"INSERT INTO open_party (open_party_id, game_master_id, campaign, game_location, game_frequency, max_players, game_time, date_created, tc) VALUES('{body['open_party_id']}', '{body['game_master_id']}', '{body['campaign']}', '{body['game_location']}','{body['game_frequency']}',  {body['max_players']}, '{body['game_time']}', '{body['date_created']}','{body['tc']}');")
-    
-#     with DB_ENGINE.connect() as connection:
-#         connection.execute(sql_query)
-#         connection.commit()
-    
-    
-#     logger.debug(f"Received event :create_open_party with tracecode: {body['tc']}")
-
-
-#     return body, 201
-
-
-# def join_open_party(body):
-    
-#     logger.debug(f"Received event :join_open_party with tracecode: {body['tc']}")
-
-#     body['date_created'] = datetime.datetime.now().isoformat()
-#     sql_query = sqlalchemy.text(f"INSERT INTO player_join_request (open_party_id, player_id, player_rating, alignment, background, class, level, species, date_created, tc) VALUES ('{body['open_party_id']}','{body['player_id']}',{body['player_rating']},'{body['alignment']}','{body['background']}','{body['class']}',{body['level']},'{body['species']}','{body['date_created']}','{body['tc']}')")
-      
-#     with DB_ENGINE.connect() as connection:
-#         connection.execute(sql_query)
-#         connection.commit() 
-      
-    
-#     return body, 201
-
-
 def process_messages():
     hostname = "%s:%d" % (app_config['events']['hostname'], app_config['events']['port'])
     client = KafkaClient(hosts=hostname)
     topic = client.topics[str.encode(app_config['events']['topic'])]
     consumer = topic.get_simple_consumer(consumer_group=b'event_group', reset_offset_on_start=False)
     
-    
-    # latest_offsets = topic.latest_available_offsets()
-    # for partition in consumer.partitions:
-    #     consumer.reset_offsets([(partition, latest_offsets[partition].offset[0])])
     
     for msg in consumer:
         msg_str = msg.value.decode('utf-8')

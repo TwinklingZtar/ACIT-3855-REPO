@@ -1,0 +1,9 @@
+version: 1
+events:
+  hostname: kafka-acit3855.eastus.cloudapp.azure.com
+  port: 9092
+  topic: events
+datastore: anomaly_data.json
+thresholds:
+  createOpen: 2400
+  joinOpen: 20

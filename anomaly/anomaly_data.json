@@ -1,0 +1,66 @@
+[
+    {
+        "event_id": "8690ac0b-df85-4514-a5f6-2ae423d62374",
+        "trace_id": "782dbf89-15bd-4053-8333-1cdfddd1884d_2024-12-02T05:56:38.642929",
+        "event_type": "create_open_party",
+        "anomaly_type": "out-of-24-hour-clock",
+        "description": "game time value is 9920 which is above the max of 2400",
+        "timestamp": "2024-12-02T17:16:44.957328"
+    },
+    {
+        "event_id": "051f40b9-7020-44bb-aa0a-d43f50a4ecd2",
+        "trace_id": "05daf9f1-4c0c-43c2-afed-ebf03460fb3f_2024-12-02T05:58:37.180304",
+        "event_type": "create_open_party",
+        "anomaly_type": "out-of-24-hour-clock",
+        "description": "game time value is 9920 which is above the max of 2400",
+        "timestamp": "2024-12-02T17:16:44.974373"
+    },
+    {
+        "event_id": "45dbb3c1-fec5-40b0-8265-18e8c3b67383",
+        "trace_id": "4ea665f9-7e4b-450a-89f3-f855ee0d96e5_2024-12-02T06:03:34.939347",
+        "event_type": "create_open_party",
+        "anomaly_type": "out-of-24-hour-clock",
+        "description": "game time value is 9120 which is above the max of 2400",
+        "timestamp": "2024-12-02T17:16:44.989333"
+    },
+    {
+        "event_id": "c648edb2-694a-4778-88d1-9b6043602647",
+        "trace_id": "cfa50ec2-0c38-4660-b402-451a3f772858_2024-12-02T06:21:17.509989",
+        "event_type": "create_open_party",
+        "anomaly_type": "out-of-24-hour-clock",
+        "description": "game time value is 9120 which is above the max of 2400",
+        "timestamp": "2024-12-02T17:16:45.016870"
+    },
+    {
+        "event_id": "6b5b6ee5-7247-4eb1-b265-d1e3e3a259b9",
+        "trace_id": "02aaf4b3-bb1d-467d-abbe-34d3b8f5eb2f_2024-12-03T01:17:16.818519",
+        "event_type": "create_join_request",
+        "anomaly_type": "too high",
+        "description": "character level is 25 which is above the max of 20",
+        "timestamp": "2024-12-02T17:17:17.806608"
+    },
+    {
+        "event_id": "8f0c0e97-2be3-47e9-84f0-1f10004d7b3b",
+        "trace_id": "75401fb4-e203-48eb-a960-84599a7117ad_2024-12-03T01:19:13.334773",
+        "event_type": "create_join_request",
+        "anomaly_type": "too high",
+        "description": "character level is 30 which is above the max of 20",
+        "timestamp": "2024-12-02T17:19:14.281748"
+    },
+    {
+        "event_id": "357304be-1397-45a1-9686-8a47f0c1dca0",
+        "trace_id": "75401fb4-e203-48eb-a960-84599a7117ad_2024-12-03T01:19:13.334773",
+        "event_type": "create_join_request",
+        "anomaly_type": "too high",
+        "description": "character level is 30 which is above the max of 20",
+        "timestamp": "2024-12-02T17:19:22.548333"
+    },
+    {
+        "event_id": "28472cad-1873-444a-9ca1-02e68bd0c8cd",
+        "trace_id": "7b2a2b2f-90fe-4811-8d28-697225ccdfb8_2024-12-03T01:20:58.624880",
+        "event_type": "create_join_request",
+        "anomaly_type": "too high",
+        "description": "character level is 100 which is above the max of 20",
+        "timestamp": "2024-12-02T17:20:59.570227"
+    }
+]
