@@ -47,6 +47,22 @@ async function fetchData() {
         console.error('Error fetching data from endpoint3:', error.message);
         currentData.dataFromEndpoint3 = { error: 'Failed to fetch data from endpoint3' };
     }
+
+    try {
+        const response4 = await axios.get(`http://kafka-acit3855.eastus.cloudapp.azure.com:8120/anomalies?anomaly_type=createOpen`);
+        currentData.dataFromEndpoint4 = response4.data[0];
+    } catch (error) {
+        console.error('Error fetching data from endpoint4:', error.message);
+        currentData.dataFromEndpoint4 = { error: 'Failed to fetch data from endpoint4' };
+    }
+
+    try {
+        const response5 = await axios.get(`http://kafka-acit3855.eastus.cloudapp.azure.com:8120/anomalies?anomaly_type=joinOpen`);
+        currentData.dataFromEndpoint5 = response5.data[0];
+    } catch (error) {
+        console.error('Error fetching data from endpoint5:', error.message);
+        currentData.dataFromEndpoint5 = { error: 'Failed to fetch data from endpoint5' };
+    }
 }
 
 // Fetch data every 5 seconds

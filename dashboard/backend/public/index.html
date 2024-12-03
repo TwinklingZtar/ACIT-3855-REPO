@@ -22,12 +22,20 @@
         <h2>Data from Endpoint 3</h2>
         <pre id="data3">Loading data...</pre>
     </div>
+    <h2>Anomalies</h2>
+
+
+
 
     <script>
         // Elements to display data for each endpoint
         const dataDisplay1 = document.getElementById('data1');
         const dataDisplay2 = document.getElementById('data2');
         const dataDisplay3 = document.getElementById('data3');
+        const dataDisplay4 = document.getElementById('data4');
+        const dataDisplay5 = document.getElementById('data5');
+
+
 
         // Function to fetch and display data
         async function fetchData() {
@@ -41,10 +49,18 @@
                 dataDisplay1.textContent = data.dataFromEndpoint1.error ? data.dataFromEndpoint1.error : JSON.stringify(data.dataFromEndpoint1, null, 2);
                 dataDisplay2.textContent = data.dataFromEndpoint2.error ? data.dataFromEndpoint2.error : JSON.stringify(data.dataFromEndpoint2, null, 2);
                 dataDisplay3.textContent = data.dataFromEndpoint3.error ? data.dataFromEndpoint3.error : JSON.stringify(data.dataFromEndpoint3, null, 2);
+                dataDisplay4.textContent = data.dataFromEndpoint4.error ? data.dataFromEndpoint4.error : JSON.stringify(data.dataFromEndpoint4, null, 2);
+                dataDisplay5.textContent = data.dataFromEndpoint5.error ? data.dataFromEndpoint5.error : JSON.stringify(data.dataFromEndpoint5, null, 2);
+
+
             } catch (error) {
                 dataDisplay1.textContent = `Failed to fetch data: ${error.message}`;
                 dataDisplay2.textContent = `Failed to fetch data: ${error.message}`;
                 dataDisplay3.textContent = `Failed to fetch data: ${error.message}`;
+                dataDisplay4.textContent = `Failed to fetch data: ${error.message}`;
+                dataDisplay5.textContent = `Failed to fetch data: ${error.message}`;
+
+
             }
         }
 
