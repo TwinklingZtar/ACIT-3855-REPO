@@ -109,7 +109,7 @@ def get_event_stats():
     #     logger.info(f"RES LIST FOR Q2 {res_list2}")
         
         # return 500
-    stat_data["num_jop"] = int(res_list2[0])
+    stat_data["num_jop"] = res_list2
     
     print(stat_data)
     logger.info(stat_data)
