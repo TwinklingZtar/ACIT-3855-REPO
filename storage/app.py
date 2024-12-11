@@ -93,7 +93,7 @@ def get_event_stats():
     for result in results:
         res_list.append(result)
  
-    stat_data["num_cop"] = res_list[0["count(tc)"]]
+    stat_data["num_cop"] = res_list[0]
     
     sqlquery2 = "SELECT count(tc) FROM open_party"
     
@@ -104,7 +104,7 @@ def get_event_stats():
     for result in results:
         res_list2.append(result)
   
-    stat_data["num_jop"] = res_list2[0["count(tc)"]]
+    stat_data["num_jop"] = res_list2[0]
     
     print(stat_data)
     logger.info(stat_data)
