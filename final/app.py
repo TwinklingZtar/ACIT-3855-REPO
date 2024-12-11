@@ -108,6 +108,13 @@ def get_health():
         data = json.load(file)
     return data, 200
         
+def init_scheduler():
+    
+    sched = BackgroundScheduler(deamon=True)
+    sched.add_job(check_services, 'interval', seconds = app_config['timer'])
+    sched.start()
+    pass
+
 
 
 app = connexion.FlaskApp(__name__, specification_dir='')
@@ -118,4 +125,5 @@ validate_responses=True)
 
 
 if __name__=="__main__":
+    init_scheduler()
     app.run(host="0.0.0.0",port=8130)

@@ -7,5 +7,5 @@ urls:
   ANALYZER_URL : http://kafka-acit3855.eastus.cloudapp.azure.com:8110/stats
 timeout: 2
 eventfile: status.json
-
+timer: 10
   
