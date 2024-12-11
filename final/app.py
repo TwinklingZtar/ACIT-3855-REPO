@@ -78,6 +78,7 @@ def check_services():
         response = requests.get(STORAGE_URL, timeout=TIMEOUT)
         if response.status_code == 200:
             storage_json = response.json()
+            logger.info(storage_json)
             storage_status = f"Storage has {storage_json['num_cop']} create events and {storage_json['num_jop']} join events"
             logger.info("Storage is Healthy")
             results['storage_status'] = storage_status
