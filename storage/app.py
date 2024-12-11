@@ -92,10 +92,8 @@ def get_event_stats():
     res_list = []
     for result in results:
         res_list.append(result)
-    # if len(res_list) != 1:
-    #     logger.info(f"RES LIST FOR Q1 {res_list}")
-    #     return 500
-    stat_data["num_cop"] = res_list
+ 
+    stat_data["num_cop"] = int(res_list[0["count(tc)"]])
     
     sqlquery2 = "SELECT count(tc) FROM open_party"
     
@@ -105,17 +103,14 @@ def get_event_stats():
     res_list2 = []
     for result in results:
         res_list2.append(result)
-    # if len(res_list2) != 1:
-    #     logger.info(f"RES LIST FOR Q2 {res_list2}")
-        
-        # return 500
-    stat_data["num_jop"] = res_list2
+  
+    stat_data["num_jop"] = int(res_list2[0["count(tc)"]])
     
     print(stat_data)
     logger.info(stat_data)
     
     
-    return 200
+    return stat_data, 200
 
 
 def get_open_parties(start_timestamp, end_timestamp):
