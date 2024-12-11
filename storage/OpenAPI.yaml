@@ -165,8 +165,8 @@ components:
 
     Stats: 
       required:
-        - num_bp
-        - num_hr 
+        - num_cop
+        - num_jop 
       properties:
         num_bp:
           type: integer
