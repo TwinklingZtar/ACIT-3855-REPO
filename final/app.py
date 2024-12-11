@@ -44,10 +44,10 @@ logger.info("Log Conf File: %s" % log_conf_file)
 
 
 
-RECEIVER_URL = app_config['url']['RECEIVER_URL']
-STORAGE_URL = app_config['url']['RECEIVER_URL']
-PROCESSING_URL = app_config['url']['PROCESSING_URL']
-ANALYZER_URL = app_config['url']['ANALYZER_URL']
+RECEIVER_URL = app_config['urls']['RECEIVER_URL']
+STORAGE_URL = app_config['urls']['RECEIVER_URL']
+PROCESSING_URL = app_config['urls']['PROCESSING_URL']
+ANALYZER_URL = app_config['urls']['ANALYZER_URL']
 TIMEOUT = app_config['timeout'] # Set to 2 seconds in your config file
 EVENTFILE = app_config['eventfile']
 
