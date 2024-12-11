@@ -69,6 +69,50 @@ logger.info(f"hostname: {app_config['datastore']['hostname']} | connection port 
 
 
 
+def get_event_stats():
+    connection = mysql.connector.connect(
+        user=app_config['datastore']['user'],
+        password=app_config['datastore']['password'],
+        host=app_config['datastore']['hostname'],
+        port=app_config['datastore']['port'],
+        database=app_config['datastore']['db']
+    )
+    
+    stat_data = {"num_cop": 0, "num_jop": 0}
+    
+    
+    cursor = connection.cursor(dictionary=True)
+    
+    sqlquery1 = "SELECT count(tc) FROM open_party"
+    
+    cursor.execute(sqlquery1)
+    results = cursor.fetchall()
+    
+    res_list = []
+    for result in results:
+        res_list.append(result)
+    if len(res_list) != 1:
+        logger.info(f"RES LIST FOR Q1 {res_list}")
+        return 500
+    stat_data["num_cop"] = int(res_list[0])
+    
+    sqlquery2 = "SELECT count(tc) FROM open_party"
+    
+    cursor.execute(sqlquery2)
+    results = cursor.fetchall()
+    res_list2 = []
+    for result in results:
+        res_list2.append(result)
+    if len(res_list2) != 1:
+        logger.info(f"RES LIST FOR Q2 {res_list2}")
+        
+        return 500
+    stat_data["num_jop"] = int(res_list2[0])
+    
+    
+    return 200
+
+
 def get_open_parties(start_timestamp, end_timestamp):
     """Fetch open party records between the start and end timestamps using mysql.connector"""
 
@@ -168,21 +212,6 @@ def process_messages():
             body['date_created'] = datetime.datetime.now().isoformat()
 
             sql_query = sqlalchemy.text(f"INSERT INTO open_party (open_party_id, game_master_id, campaign, game_location, game_frequency, max_players, game_time, date_created, tc) VALUES('{body['open_party_id']}', '{body['game_master_id']}', '{body['campaign']}', '{body['game_location']}','{body['game_frequency']}',  {body['max_players']}, '{body['game_time']}', '{body['date_created']}','{body['tc']}');")
-            
-            # connection = mysql.connector.connect(
-            #     user=app_config['datastore']['user'],
-            #     password=app_config['datastore']['password'],
-            #     host=app_config['datastore']['hostname'],
-            #     port=app_config['datastore']['port'],
-            #     database=app_config['datastore']['db']
-            # )
-            
-            # cursor = connection.cursor(dictionary=True)
-            
-            # # with DB_ENGINE.connect() as connection:
-            # cursor.execute(sql_query)
-            # cursor.close()
-            # connection.close()
             
             
             

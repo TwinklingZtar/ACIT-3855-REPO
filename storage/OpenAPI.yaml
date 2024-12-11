@@ -12,6 +12,20 @@ tags:
   description: Operations used to form a party of players
 paths:
 
+  /stats: 
+  get:
+    summary: gets the event stats
+    operationId: app.get_event_stats
+    description: Gets the stats of the history events 
+    responses:
+      '200':
+        description: Successfully returned  event stats
+        content:
+          application/json: 
+            schema:
+              $ref: '#/components/schemas/Stats'
+
+
 
   /party-list/create-open-party:
 
@@ -148,6 +162,19 @@ paths:
     #       description: "Invalid input, object invalid"
 components:
   schemas:
+
+    Stats: 
+      required:
+        - num_bp
+        - num_hr 
+      properties:
+        num_bp:
+          type: integer
+          example: 100 
+        num_hr:
+          type: integer
+          example: 100
+
     OpenPartyCard:
       required:
       - tc

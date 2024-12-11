@@ -5,11 +5,6 @@ import uvicorn
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests
 
-# from db import make_session
-# from models import Base, OpenParty, PartyJoinRequest
-# from sqlalchemy import create_engine
-# from sqlalchemy.orm import sessionmaker
-# from sqlalchemy import Column, Integer, String, DateTime
 import datetime
 import sqlalchemy
 import mysql.connector

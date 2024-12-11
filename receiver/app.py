@@ -52,7 +52,7 @@ logger.info("Log Conf File: %s" % log_conf_file)
 #     log_config = yaml.safe_load(f.read(),)
 #     logging.config.dictConfig(log_config)
 
-logger = logging.getLogger('basicLogger')
+# logger = logging.getLogger('basicLogger')
 
 
 client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
@@ -71,6 +71,14 @@ producer = topic.get_sync_producer()
 # producer.produce(msg_str.encode('utf-8'))
 
 # functions here
+
+
+def get_check():
+    
+    return 200
+
+
+
 def create_open_party(body):
     
 

@@ -14,6 +14,16 @@ tags:
 
 
 paths:
+
+  /check:
+  get:
+    summary: Checks the health of the Receiver
+    operationId: app.get_check
+    description: Service is healthy if this service returns a response
+    responses:
+      '200':
+        description: OK
+
   /party-list/create-open-party:
      
     post:
