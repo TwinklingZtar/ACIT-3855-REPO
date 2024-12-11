@@ -16,21 +16,21 @@ tags:
 paths:
 
   /check:
-  get:
-    summary: Checks the health of the Receiver
-    operationId: app.get_check
-    description: Service is healthy if this service returns a response
-    responses:
-      '200':
-        description: OK
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: "Service is healthy"
+    get:
+      summary: Checks the health of the Receiver
+      operationId: app.get_check
+      description: Service is healthy if this service returns a response
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Service is healthy"
 
   /party-list/create-open-party:
      
