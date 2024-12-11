@@ -106,6 +106,23 @@ services:
       - storage
       - receiver
 
+
+  final:
+    image: final
+    build:
+      context: ../final
+    ports:
+      - "8130:8130"
+    environment:
+      - TARGET_ENV=test
+    volumes:
+      - /home/azureuser/config/final:/config
+      - /home/azureuser/logs:/logs
+    depends_on:
+      - storage
+      - receiver
+      - analyzer
+
   analyzer:
     image: analyzer
     build:

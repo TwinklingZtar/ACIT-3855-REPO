@@ -10,8 +10,9 @@ import datetime
 import uvicorn
 import os
 
-from pykafka import KafkaClient
 
+import requests
+from requests.exceptions import Timeout, ConnectionError
 
 
 
@@ -43,16 +44,70 @@ logger.info("Log Conf File: %s" % log_conf_file)
 
 
 
-
-# client = KafkaClient(hosts=f"{app_config['events']['hostname']}:{app_config['events']['port']}")
-# topic = client.topics[str.encode(app_config['events']['topic'])]
-# producer = topic.get_sync_producer()
-
-
+RECEIVER_URL = app_config['url']['RECEIVER_URL']
+STORAGE_URL = app_config['url']['RECEIVER_URL']
+PROCESSING_URL = app_config['url']['PROCESSING_URL']
+ANALYZER_URL = app_config['url']['ANALYZER_URL']
+TIMEOUT = app_config['timeout'] # Set to 2 seconds in your config file
+EVENTFILE = app_config['eventfile']
 
 
 
 ### ENDPOINTS HERE
+
+
+
+def check_services():
+    """ Called periodically """
+    results = {}
+    receiver_status = "Unavailable"
+    try:
+        response = requests.get(RECEIVER_URL, timeout=TIMEOUT)
+        if response.status_code == 200:
+            receiver_status = "Healthy"
+            logger.info("Receiver is Healthly")
+            results["receiver_status"] = receiver_status
+        else:
+            logger.info("Receiver returning non-200 response")
+    except (Timeout, ConnectionError):
+        logger.info("Receiver is Not Available")
+
+    storage_status = "Unavailable"
+    try:
+        response = requests.get(STORAGE_URL, timeout=TIMEOUT)
+        if response.status_code == 200:
+            storage_json = response.json()
+            storage_status = f"Storage has {storage_json['num_cop']} create events and {storage_json['num_jop']} join events"
+            logger.info("Storage is Healthy")
+            results['storage_status'] = storage_status
+        else:
+            logger.info("Storage returning non-200 response")
+    except (Timeout, ConnectionError):
+        logger.info("Storage is Not Available")
+        
+    try:
+        response = requests.get(ANALYZER_URL, timeout=TIMEOUT)
+        if response.status_code == 200:
+            storage_json = response.json()
+            analyzer_status = f"Analyzer has {storage_json['num_cop']} create events and {storage_json['num_jop']} join events"
+            logger.info("Storage is Healthy")
+            results['analyzer_status'] = analyzer_status
+        else:
+            logger.info("Storage returning non-200 response")
+    except (Timeout, ConnectionError):
+        logger.info("Storage is Not Available")
+        
+    with open(EVENTFILE, 'w') as file:
+        json.dump(results)
+        
+
+
+
+def get_health():
+    with open(EVENTFILE,'r')as file:
+        data = json.load(file)
+    return data, 200
+        
 
 
 app = connexion.FlaskApp(__name__, specification_dir='')
