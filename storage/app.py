@@ -83,7 +83,7 @@ def get_event_stats():
     
     cursor = connection.cursor(dictionary=True)
     
-    sqlquery1 = "SELECT count() FROM open_party"
+    sqlquery1 = "SELECT count(tc) FROM open_party"
     
     cursor.execute(sqlquery1)
     results = cursor.fetchall()
@@ -92,7 +92,7 @@ def get_event_stats():
  
     stat_data['num_cop'] = results[0]
     
-    sqlquery2 = "SELECT count() FROM open_party"
+    sqlquery2 = "SELECT count(tc) FROM open_party"
     
     cursor.execute(sqlquery2)
     results = cursor.fetchall()
@@ -102,8 +102,8 @@ def get_event_stats():
     stat_data['num_jop'] = results[0]
     
     logger.info("stats before" + stat_data)
-    stat_data['num_cop'] = stat_data['num_cop']['count()']
-    stat_data['num_jop'] = stat_data['num_jop']['count()']
+    stat_data['num_cop'] = stat_data['num_cop']['count(tc)']
+    stat_data['num_jop'] = stat_data['num_jop']['count(tc)']
     
     
     print(stat_data)
