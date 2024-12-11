@@ -101,7 +101,7 @@ def get_event_stats():
   
     stat_data['num_jop'] = results[0]
     
-    logger.info("stats before" + stat_data)
+    # logger.info("stats before" + stat_data)
     stat_data['num_cop'] = stat_data['num_cop']['count(tc)']
     stat_data['num_jop'] = stat_data['num_jop']['count(tc)']
     
