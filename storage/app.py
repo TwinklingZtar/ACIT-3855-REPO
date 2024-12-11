@@ -87,27 +87,32 @@ def get_event_stats():
     
     cursor.execute(sqlquery1)
     results = cursor.fetchall()
+    logger.info("RESULTS HERE" + f"{results}")
     
     res_list = []
     for result in results:
         res_list.append(result)
-    if len(res_list) != 1:
-        logger.info(f"RES LIST FOR Q1 {res_list}")
-        return 500
-    stat_data["num_cop"] = int(res_list[0])
+    # if len(res_list) != 1:
+    #     logger.info(f"RES LIST FOR Q1 {res_list}")
+    #     return 500
+    stat_data["num_cop"] = res_list
     
     sqlquery2 = "SELECT count(tc) FROM open_party"
     
     cursor.execute(sqlquery2)
     results = cursor.fetchall()
+    logger.info("RESULTS HERE" + f"{results}")
     res_list2 = []
     for result in results:
         res_list2.append(result)
-    if len(res_list2) != 1:
-        logger.info(f"RES LIST FOR Q2 {res_list2}")
+    # if len(res_list2) != 1:
+    #     logger.info(f"RES LIST FOR Q2 {res_list2}")
         
-        return 500
+        # return 500
     stat_data["num_jop"] = int(res_list2[0])
+    
+    print(stat_data)
+    logger.info(stat_data)
     
     
     return 200
