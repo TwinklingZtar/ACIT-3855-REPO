@@ -74,8 +74,7 @@ producer = topic.get_sync_producer()
 
 
 def get_check():
-    
-    return 200
+    return {"message": "Service is healthy"}, 200
 
 
 
