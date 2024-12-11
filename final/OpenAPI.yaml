@@ -12,29 +12,29 @@ tags:
   description: Operations used to form a party of players
 paths:
 
-/health: 
-  get:
-    summary: gets the event stats
-    operationId: app.get_health
-    description: Gets the stats of the history events 
-    responses:
-      '200':
-        description: Successfully returned a heart rate event 
-        content:
-          application/json: 
-            schema:
-              required:
-                - receiver_status
-                - storage_status
-                - analyzer_status
-              type: object
-              properties:
-                receiver_status:
-                  type: string
-                storage_status:
-                  type: string
-                analyzer_status:
-                  type: string
+  /health: 
+    get:
+      summary: gets the event stats
+      operationId: app.get_health
+      description: Gets the stats of the history events 
+      responses:
+        '200':
+          description: Successfully returned a heart rate event 
+          content:
+            application/json: 
+              schema:
+                required:
+                  - receiver_status
+                  - storage_status
+                  - analyzer_status
+                type: object
+                properties:
+                  receiver_status:
+                    type: string
+                  storage_status:
+                    type: string
+                  analyzer_status:
+                    type: string
               
 
 
